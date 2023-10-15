@@ -1,22 +1,25 @@
-//Import Express.js
+//Import express.js
 const express = require('express');
-//const uuid = require('./helpers/uuid');
-//const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
-//Import 'path' to resolve path of files located on server
-const path = require('path');
-//Initialize express.js
+
+// app use express
 const app = express();
-//Specify which port express.js will run
-const PORT = 3001;
-//Static middleware pointing to public folder
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
+// creating environment variable port
+const PORT = process.env.PORT || 3001;
+
+
+
 app.use(express.static('public'));
-//get request to display index.html
-app.get('/', (req, res)=> {
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-});
-//Get request to get to return notes/html file
-app.get('/notes', (req, res)=>{
-    res.sendFile(path.join(__dirname, '/public/notes.html'))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+// routes to route files
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app);
+
+
+// app listener - starts the server
+app.listen(PORT, () => {
+  console.log(`Server available at http://localhost:${PORT}`);
 });
