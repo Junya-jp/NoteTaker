@@ -1,5 +1,8 @@
  # Note-Taker
- ## Table of Content
+
+  
+
+  ## Table of Content
   - [Project Description](#Description)
   - [Usage](#Usage)
   - [Installation](#Installation)
